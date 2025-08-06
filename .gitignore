@@ -30,6 +30,7 @@ tags
 node_modules
 yarn.lock
 package-lock.json
-.env
 /admin/app/assets/builds
 /test-results
+.env
+.env.*.local

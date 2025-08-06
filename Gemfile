@@ -8,7 +8,7 @@ gemspec require: false
 if /(stable|main)/.match? ENV['RAILS_VERSION']
   gem 'rails', github: 'rails', require: false, branch: ENV['RAILS_VERSION']
 else
-  gem 'rails', ENV['RAILS_VERSION'] || ['> 7.0', '< 8.1.0.beta1'], require: false
+  gem 'rails', ENV['RAILS_VERSION'] || ['> 7.0', '< 8.3'], require: false
 end
 # rubocop:enable Bundler/DuplicatedGem
 
@@ -83,3 +83,8 @@ end
 
 custom_gemfile = File.expand_path('Gemfile-custom', __dir__)
 eval File.read(custom_gemfile), nil, custom_gemfile, 0 if File.exist?(custom_gemfile)
+
+# All runtime config come from the UNIX environment#
+# but for development and test we store them in .env.* files
+# and override them with sensitive data in .env.*.local files
+gem "dotenv-rails", groups: [:development, :test]
